@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/user.model";
+import User from "../models/user.model.js";
 
 export const protectRoute = async (req, res, next) => {
   try {
@@ -9,6 +9,7 @@ export const protectRoute = async (req, res, next) => {
       throw new Error("Not authorized, no token");
     }
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // console.log(decoded);
     if (!decoded) {
       res.status(401);
       throw new Error("Not authorized, token failed");
